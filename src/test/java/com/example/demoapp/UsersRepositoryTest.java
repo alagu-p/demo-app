@@ -1,22 +1,31 @@
 package com.example.demoapp;
 
+import com.example.demoapp.model.Users;
+import com.example.demoapp.repository.UsersRepository;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ContextConfiguration;
 
-import java.util.ArrayList;
+import javax.sql.DataSource;
 import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+@ContextConfiguration
 @DataJpaTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class UsersRepositoryTest {
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private DataSource dataSource;
     @Autowired
     private UsersRepository userRepository;
 
